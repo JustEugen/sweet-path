@@ -1,6 +1,6 @@
 // insert(...params: P extends string ? [Record<P, string | number>] : []) {
 
-export class QuickPath<P extends string> {
+export class SweetPath<P extends string> {
   constructor(private readonly path: string) {}
 
   insert(pathParams: Record<P, any>) {

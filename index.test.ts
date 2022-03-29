@@ -1,15 +1,15 @@
-import { QuickPath } from "./index";
+import { SweetPath } from "./index";
 
 describe("QuickPath", () => {
   describe("original()", () => {
     it("should return original URL if URL has no path params", () => {
-      const instance = new QuickPath("https://test.com/");
+      const instance = new SweetPath("https://test.com/");
 
       expect(instance.original).toEqual("https://test.com/");
     });
 
     it("should return original URL if URL has path params", () => {
-      const instance = new QuickPath(
+      const instance = new SweetPath(
         "https://test.com/:check1/:check2/:check3/:check4"
       );
 
@@ -21,13 +21,13 @@ describe("QuickPath", () => {
 
   describe("insert()", () => {
     it("should return original URL if URL has no path parameters", () => {
-      const instance = new QuickPath("https://test.com/");
+      const instance = new SweetPath("https://test.com/");
 
       expect(instance.insert({})).toEqual("https://test.com/");
     });
 
     it("should return URL with path parameters", () => {
-      const instance = new QuickPath<"check1" | "check2">(
+      const instance = new SweetPath<"check1" | "check2">(
         "https://test.com/:check1/:check2"
       );
 
