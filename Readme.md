@@ -1,4 +1,4 @@
-#Sweet Path [![npm package][npm-badge]][npm]
+# Sweet Path [![npm package][npm-badge]][npm]
 
 [npm-badge]: https://img.shields.io/badge/npm-sweet--path-blue
 [npm]: https://www.npmjs.com/package/sweet-path
@@ -28,7 +28,7 @@ If you have more than 1 path parameters it should be separated by **|** sign:
 const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/:bookId/authors/:authorId");
 ```
 
-###To insert parameters:
+### To insert parameters:
 1. **You have path parameters:**
 ```js
 const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/:bookId/authors/:authorId");
@@ -47,7 +47,7 @@ const instance = new SweetPath("https://test.com/books");
 instance.insert({}); // https://test.com/books
 ```
 
-###To get original:
+### To get original:
 Return the same string you have passed in **SweetPath** constructor
 ```js
 const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/:bookId/authors/:authorId");
