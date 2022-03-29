@@ -20,7 +20,9 @@ const instance = new SweetPath("https://test.com");
 
 If you have path parameters inside of URL, you should specify it in Generic. But this is only for thous, who using Typescript, it will give you additional syntax highlight when you will insert parameters, or error if you forget to specify them.
 
-`const instance = new SweetPath<'entityId'>("https://test.com/entities/:entiityId");`
+```js
+const instance = new SweetPath<'entityId'>("https://test.com/entities/:entiityId");
+```
 
 If you have more than 1 path parameters it should be separated by **|** sign:
 
