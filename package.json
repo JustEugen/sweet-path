@@ -1,7 +1,20 @@
 {
   "name": "sweet-path",
   "version": "1.0.1",
-  "description": "",
+  "description": "Sweet Path is small utility class, for replacing path parameters. It's size around 1kb before gzip. ",
+  "keywords": [
+    "url",
+    "path parameters",
+    "path parameters replacment"
+  ],
+  "homepage": "https://github.com/JustEugen/sweet-path",
+  "repository": {
+    "url": "https://github.com/JustEugen/sweet-path",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/JustEugen/sweet-path/issues"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,7 +22,11 @@
     "dev": "./node_modules/typescript/bin/tsc --watch",
     "test": "./node_modules/jest/bin/jest.js"
   },
-  "author": "",
+  "files": [
+    "./dist/index.js",
+    "./dist/index.d.ts"
+  ],
+  "author": "JustEugen",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.17.8",
