@@ -26,17 +26,83 @@ describe("QuickPath", () => {
       expect(instance.insert({})).toEqual("https://test.com/");
     });
 
-    it("should return URL with path parameters", () => {
-      const instance = new SweetPath<"check1" | "check2">(
-        "https://test.com/:check1/:check2"
-      );
+    describe("path options", () => {
+      it("should return URL with path parameters, if options path parameter is not defined", () => {
+        const instance = new SweetPath<"check1" | "check2">(
+          "https://test.com/:check1/:check2"
+        );
 
-      expect(
-        instance.insert({
-          check1: "hello",
-          check2: 1,
-        })
-      ).toEqual("https://test.com/hello/1");
+        expect(
+          instance.insert({
+            check1: "hello",
+            check2: 1,
+          })
+        ).toEqual("https://test.com/hello/1");
+      });
+
+      it("should return URL with path parameters, if options path parameter is ':param'", () => {
+        const instance = new SweetPath<"check1" | "check2">(
+          "https://test.com/:check1/:check2",
+          {
+            path: ':param'
+          }
+        );
+
+        expect(
+          instance.insert({
+            check1: 0,
+            check2: 1,
+          })
+        ).toEqual("https://test.com/0/1");
+      });
+
+      it("should return URL with path parameters, if options path parameter is '{param}'", () => {
+        const instance = new SweetPath<"check1" | "check2">(
+          "https://test.com/{check1}/{check2}",
+          {
+            path: '{param}'
+          }
+        );
+
+        expect(
+          instance.insert({
+            check1: 0,
+            check2: 1,
+          })
+        ).toEqual("https://test.com/0/1");
+      });
+
+      it("should return URL with path parameters, if options path parameter is '{param}'", () => {
+        const instance = new SweetPath<"check1" | "check2">(
+          "https://test.com/{{check1}}/{{check2}}",
+          {
+            path: '{{param}}'
+          }
+        );
+
+        expect(
+          instance.insert({
+            check1: 0,
+            check2: 1,
+          })
+        ).toEqual("https://test.com/0/1");
+      });
+
+      it("should return URL with path parameters, if options path parameter is '{param}'", () => {
+        const instance = new SweetPath<"check1" | "check2">(
+          "https://test.com/[check1]/[check2]",
+          {
+            path: '[param]'
+          }
+        );
+
+        expect(
+          instance.insert({
+            check1: 0,
+            check2: 1,
+          })
+        ).toEqual("https://test.com/0/1");
+      });
     });
   });
 });

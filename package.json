@@ -1,11 +1,13 @@
 {
   "name": "sweet-path",
-  "version": "1.0.2",
+  "version": "1.1.2",
   "description": "Sweet Path is small utility class, for replacing path parameters. It's size around 1kb before gzip. ",
   "keywords": [
     "url",
     "path parameters",
-    "path parameters replacment"
+    "path parameters replacment",
+    "path",
+    "util"
   ],
   "homepage": "https://github.com/JustEugen/sweet-path",
   "repository": {

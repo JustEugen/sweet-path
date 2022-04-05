@@ -57,3 +57,28 @@ const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/:b
 instance.original; // https://test.com/books/:bookId/authors/:authorId
 ```
 
+### Options
+While creating SweetPath instance you are able to set additional options, **which are not required!**;
+```js
+{
+  path: string
+}
+```
+
+`path` - set replace identifier. By default, SweetPath is using `:param` identifier.
+
+- `:param`
+- `{{param}}`
+- `{param}`
+- `[param]`
+
+For example:
+```js
+const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/{{bookId}}/authors/{{authorId}}", {
+  path: "{{param}}"
+});
+
+instance.original; // https://test.com/books/{{bookId}}/authors/{{authorId}}
+
+instance.insert({ bookId: 1, authordId: 10 }); // https://test.com/books/1/authors/2
+```
