@@ -5,7 +5,7 @@ export type SweetPathOptions = {
   path: SweetPathParam;
 };
 
-export class SweetPath<P extends string> {
+export class SweetPath<P extends string | void = void> {
   constructor(
     private readonly path: string,
     private readonly options?: Partial<SweetPathOptions>
@@ -18,10 +18,14 @@ export class SweetPath<P extends string> {
     }
   }
 
-  insert(pathParams: Record<P, any>) {
+  insert(pathParams: P extends string ? Record<P, any> : void) {
+    if (!pathParams) {
+      return this.path;
+    }
+
     let finalPath = this.path;
 
-    const pathParamsKeys = Object.keys(pathParams) as Array<P>;
+    const pathParamsKeys = Object.keys(pathParams);
 
     for (let key of pathParamsKeys) {
       let replacerKey: string = "";
@@ -40,3 +44,7 @@ export class SweetPath<P extends string> {
     return this.path;
   }
 }
+
+new SweetPath("adsfasdf").insert();
+
+new SweetPath<"id">("asdfadsf").insert({ id: "dfasd" });

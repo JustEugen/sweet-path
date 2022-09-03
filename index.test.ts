@@ -23,7 +23,7 @@ describe("QuickPath", () => {
     it("should return original URL if URL has no path parameters", () => {
       const instance = new SweetPath("https://test.com/");
 
-      expect(instance.insert({})).toEqual("https://test.com/");
+      expect(instance.insert()).toEqual("https://test.com/");
     });
 
     describe("path options", () => {
@@ -44,7 +44,7 @@ describe("QuickPath", () => {
         const instance = new SweetPath<"check1" | "check2">(
           "https://test.com/:check1/:check2",
           {
-            path: ':param'
+            path: ":param",
           }
         );
 
@@ -60,7 +60,7 @@ describe("QuickPath", () => {
         const instance = new SweetPath<"check1" | "check2">(
           "https://test.com/{check1}/{check2}",
           {
-            path: '{param}'
+            path: "{param}",
           }
         );
 
@@ -76,7 +76,7 @@ describe("QuickPath", () => {
         const instance = new SweetPath<"check1" | "check2">(
           "https://test.com/{{check1}}/{{check2}}",
           {
-            path: '{{param}}'
+            path: "{{param}}",
           }
         );
 
@@ -92,7 +92,7 @@ describe("QuickPath", () => {
         const instance = new SweetPath<"check1" | "check2">(
           "https://test.com/[check1]/[check2]",
           {
-            path: '[param]'
+            path: "[param]",
           }
         );
 
