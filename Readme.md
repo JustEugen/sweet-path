@@ -19,11 +19,21 @@ instance.insert({ entityId: 10 }); // "https://test.com/10"
 instance.original; // "https://test.com/:entiityId"
 ```
 
+If you don't have path parameters:
+
+```js
+const instance = new SweetPath("https://test.com");
+
+instance.insert(); // "https://test.com"
+
+instance.original; // "https://test.com"
+```
+
 ### Instance methods and properties
 
-**instance.insert([,params])**
+**# instance.insert([,params])**
 
-**instance.original**
+**# instance.original**
 
 ## Typescript type safety
 
