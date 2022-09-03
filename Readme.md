@@ -3,65 +3,54 @@
 [npm-badge]: https://img.shields.io/badge/npm-sweet--path-blue
 [npm]: https://www.npmjs.com/package/sweet-path
 
-Sweet Path is small utility class, for replacing path parameters. It's size around 1kb before gzip.
+**Sweet Path** is small utility class, for replacing parameters in your text by specified pattern. Package is easy to use, Typescript oriented, and it's size around 1kb before gzip.
 
-## Why Sweet Path ?
+## How to use
 
-The best example of using Sweet Path is organizing your **routes** or **endpoints** in frontend application with saving types
-
-## API
-
-### Create SweetPath:
-To create **SweetPath** instance you have to pass string in constructor`s first argument:
+By default, **Sweet Path** is using `:parameter` pattern, and it will replace it with your value. You can see all available patterns in options section [here](#options).
 
 ```js
-const instance = new SweetPath("https://test.com");
+const instance = new SweetPath("https://test.com/:entiityId");
+
+// To replace parameter with your value
+instance.insert({ entityId: 10 }); // "https://test.com/10"
+
+// To get original string you passeed into SweetPath constructor;
+instance.original; // "https://test.com/:entiityId"
 ```
 
-If you have path parameters inside of URL, you should specify it in Generic. But this is only for thous, who using Typescript, it will give you additional syntax highlight when you will insert parameters, or error if you forget to specify them.
+### Instance methods and properties
 
-```js
-const instance = new SweetPath<'entityId'>("https://test.com/entities/:entiityId");
-```
+**instance.insert([,params])**
 
-If you have more than 1 path parameters it should be separated by **|** sign:
+**instance.original**
 
-```js
-const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/:bookId/authors/:authorId");
-```
+## Typescript type safety
 
-### To insert parameters:
-1. **You have path parameters:**
-```js
-const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/:bookId/authors/:authorId");
+**SweetPath** will care you passed all required params, but you have to specify it first in **SweetPath** [Generic](https://www.typescriptlang.org/docs/handbook/2/generics.html#handbook-content) as [Literal Type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types).
 
-instance.insert({ bookId: 1, authordId: 10 }); // https://test.com/books/1/authors/2
+```typescript
+const instance = new SweetPath<"bookId" | "authorId">("https://test.com/books/:bookId/authors/:authorId");
 
-// if you didn't specify all parameters and you are using Typescript you'll get error
-instance.insert({ bookId: 1 }); // Error: Argument of type '{}' is not assignable to parameter of type 'Record<"bookId" | "authorId", any>
-```
+instance.insert({ bookId: 10, authorId: 20 }); // https://test.com/books/10/authors/20
 
-2. **You don't have path parameters:**
+// In case you will not pass params specifed in Generic you'll get Typescript Error
+instance.insert();
 
-```js
-const instance = new SweetPath("https://test.com/books");
+// Also will be Typescript Error
+instance.insert({});
 
-instance.insert({}); // https://test.com/books
-```
-
-### To get original:
-Return the same string you have passed in **SweetPath** constructor
-```js
-const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/:bookId/authors/:authorId");
-
-instance.original; // https://test.com/books/:bookId/authors/:authorId
+// Also will be Typescript Error
+instance.insert({ bookId: 10 })
 ```
 
 ### Options
+
 While creating SweetPath instance you are able to set additional options, **which are not required!**;
+
 ```js
 {
-  path: string
+  path: string;
 }
 ```
 
@@ -73,12 +62,11 @@ While creating SweetPath instance you are able to set additional options, **whic
 - `[param]`
 
 For example:
+
 ```js
-const instance = new SweetPath<'bookId' | 'authorId'>("https://test.com/books/{{bookId}}/authors/{{authorId}}", {
-  path: "{{param}}"
-});
+const instance = new SweetPath("https://test.com/{{entiityId}}", { path: "{{param}}" });
 
-instance.original; // https://test.com/books/{{bookId}}/authors/{{authorId}}
+instance.insert({ entityId: 10 }); // "https://test.com/10"
 
-instance.insert({ bookId: 1, authordId: 10 }); // https://test.com/books/1/authors/2
+instance.original; // "https://test.com/{{entiityId}}"
 ```

@@ -45,6 +45,3 @@ export class SweetPath<P extends string | void = void> {
   }
 }
 
-new SweetPath("adsfasdf").insert();
-
-new SweetPath<"id">("asdfadsf").insert({ id: "dfasd" });
