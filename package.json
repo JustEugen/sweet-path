@@ -1,6 +1,6 @@
 {
   "name": "sweet-path",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "Sweet Path is small utility class, for replacing path parameters. It's size around 1kb before gzip. ",
   "keywords": [
     "url",

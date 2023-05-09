@@ -5,7 +5,7 @@ export type SweetPathOptions = {
   path: SweetPathParam;
 };
 
-export class SweetPath<P extends string | void = void> {
+export class SweetPath<P extends string | void> {
   constructor(
     private readonly path: string,
     private readonly options?: Partial<SweetPathOptions>
@@ -18,7 +18,7 @@ export class SweetPath<P extends string | void = void> {
     }
   }
 
-  insert(pathParams: P extends string ? Record<P, any> : void) {
+  insert(pathParams: P extends void ? undefined | void | Record<any, any> : P extends string ? Record<P, any> : unknown) {
     if (!pathParams) {
       return this.path;
     }
@@ -44,4 +44,3 @@ export class SweetPath<P extends string | void = void> {
     return this.path;
   }
 }
-
