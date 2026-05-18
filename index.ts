@@ -1,43 +1,37 @@
-// insert(...params: P extends string ? [Record<P, string | number>] : []) {
+export type PathParamValue = string | number | boolean;
 
-export type SweetPathParam = ":param" | "{{param}}" | "{param}" | "[param]";
-export type SweetPathOptions = {
-  path: SweetPathParam;
-};
+export type PathParam<S extends string> =
+  S extends `${infer _Head}/:${infer Rest}`
+    ? Rest extends `${infer Name}/${infer Tail}`
+      ? Name | PathParam<`/${Tail}`>
+      : Rest
+    : never;
 
-export class SweetPath<P extends string | void> {
-  constructor(
-    private readonly path: string,
-    private readonly options?: Partial<SweetPathOptions>
-  ) {
-    if (this.options === undefined || this.options.path === undefined) {
-      this.options = {
-        ...this.options,
-        path: ":param",
-      };
-    }
-  }
+export type PathParams<P extends string> = Record<P, PathParamValue>;
 
-  insert(pathParams: P extends void ? undefined | void | Record<any, any> : P extends string ? Record<P, any> : unknown) {
-    if (!pathParams) {
+type InsertArgs<P extends string> = [P] extends [never]
+  ? []
+  : [params: PathParams<P>];
+
+export class SweetPath<S extends string = string> {
+  constructor(private readonly path: S) {}
+
+  insert(...args: InsertArgs<PathParam<S>>): string {
+    const [params] = args as [Record<string, PathParamValue | undefined>?];
+
+    if (!params) {
       return this.path;
     }
 
-    let finalPath = this.path;
+    return this.path.replace(/\/:([A-Za-z0-9_]+)/g, (token, key) => {
+      const value = params[key];
 
-    const pathParamsKeys = Object.keys(pathParams);
-
-    for (let key of pathParamsKeys) {
-      let replacerKey: string = "";
-
-      if (this.options?.path) {
-        replacerKey = this.options.path.replace("param", key);
+      if (value === undefined) {
+        return token;
       }
 
-      finalPath = finalPath.replace(replacerKey, `${pathParams[key]}`);
-    }
-
-    return finalPath;
+      return "/" + encodeURIComponent(String(value));
+    });
   }
 
   get original(): string {

@@ -1,25 +1,26 @@
 {
   "name": "sweet-path",
-  "version": "2.0.12",
-  "description": "Sweet Path is small utility class, for replacing path parameters. It's size around 1kb before gzip. ",
+  "version": "3.0.0",
+  "description": "Tiny, type-safe utility for filling :param placeholders in URL paths. Around 1kb before gzip.",
   "keywords": [
     "url",
     "path parameters",
-    "path parameters replacment",
+    "path parameters replacement",
     "path",
     "util"
   ],
   "homepage": "https://github.com/JustEugen/sweet-path",
   "repository": {
-    "url": "https://github.com/JustEugen/sweet-path",
+    "url": "git+https://github.com/JustEugen/sweet-path.git",
     "type": "git"
   },
   "bugs": {
     "url": "https://github.com/JustEugen/sweet-path/issues"
   },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "prepublish": "./node_modules/typescript/bin/tsc",
+    "prepublishOnly": "./node_modules/typescript/bin/tsc",
     "dev": "./node_modules/typescript/bin/tsc --watch",
     "test": "./node_modules/jest/bin/jest.js"
   },
@@ -27,15 +28,12 @@
     "dist"
   ],
   "author": "JustEugen",
-  "license": "GNU GENERAL PUBLIC LICENSE",
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-typescript": "^7.16.7",
-    "@types/jest": "^27.4.1",
-    "babel-jest": "^27.5.1",
-    "jest": "^27.5.1",
-    "prettier": "2.6.1",
-    "typescript": "^4.6.3"
+    "@types/jest": "^30.0.0",
+    "jest": "^30.4.2",
+    "prettier": "^3.8.3",
+    "ts-jest": "^29.4.9",
+    "typescript": "^5.9.3"
   }
 }
